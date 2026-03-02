@@ -25,3 +25,22 @@ function flatenArr(arr){
 }
 
 console.log(flatenArr(arr))
+
+
+let search = document.getElementById("#search");
+
+search.addEventListener('input',debounce(function(e){
+console.log('searching',e.target.value)
+},500))
+
+function searchfnc(query){
+    console.log('api calls from', query)
+}
+
+ const finalRes = debounce(search,1000)
+
+ finalRes('R')
+ finalRes('Re')
+ finalRes('Res')
+ finalRes('Resu')
+ finalRes('Result')
