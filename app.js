@@ -1,24 +1,17 @@
-async function getWeather() {
-  try {
-    const city = "Rawalpindi";
-    const apiKey = "YOUR_API_KEY";
+const apikey = "fb114d7649be93882f11c863d75263ae";
+const apiUrl =
+  "https://api.openweathermap.org/data/2.5/weather?q=india&units=metric&q=";
 
-    const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${city}&q=${apiKey}`,
-    );
+async function weatherApi(city) {
+  const response = await fetch(apiUrl + city + `&apaid, ${apikey}`);
+  const data = await response.json();
 
-    const data = await response.json();
+  console.log(data);
 
-    console.log(data);
-
-    document.getElementById("weather").innerHTML = `
-      <h2>${data.name}</h2>
-      <p>Temperature: ${data.main.temp} °C</p>
-      <p>Weather: ${data.weather[0].description}</p>
-    `;
-  } catch (error) {
-    console.log("Error:", error);
-  }
+  document.querySelector(".city").innerHTML = data.name;
+  document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+  document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+  document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
 }
 
-getWeather();
+weatherApi();
